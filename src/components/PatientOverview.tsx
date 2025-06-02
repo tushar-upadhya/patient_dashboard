@@ -19,7 +19,7 @@ interface InfoRowProps {
 
 const InfoRow: React.FC<InfoRowProps> = ({ label, value }) => (
     <p className="flex justify-baseline">
-        <span className="font-medium w-28 text-left">{label}</span>
+        <span className="font-medium w-24 text-left">{label}</span>
         <span className="text-muted-foreground">{value}</span>
     </p>
 );
@@ -62,19 +62,19 @@ const PatientOverview: React.FC = () => {
 
     return (
         <Card className="w-full">
-            <CardHeader>
-                <CardTitle className="text-lg text-muted-foreground">
+            <CardHeader className="pb-2">
+                <CardTitle className="text-base text-muted-foreground">
                     Patient Overview
                 </CardTitle>
             </CardHeader>
-            <CardContent className="px-4 py-4 sm:px-6 sm:py-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full text-sm text-gray-800">
-                    <div className="space-y-4">
+            <CardContent className="px-3 py-3 sm:px-4 sm:py-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full text-sm text-gray-800">
+                    <div className="space-y-2">
                         {leftColumn.map(({ label, value }) => (
                             <InfoRow key={label} label={label} value={value} />
                         ))}
                     </div>
-                    <div className="space-y-4">
+                    <div className="space-y-2">
                         {rightColumn.map(({ label, value }) => (
                             <InfoRow key={label} label={label} value={value} />
                         ))}

@@ -11,9 +11,9 @@ const HomePage = () => {
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">
             <Topbar />
-            <div className="flex-1 p-4">
-                <main className="mt-16 px-4 sm:px-6 md:px-8 pb-24 sm:pb-20 md:pb-16">
-                    <div className="max-w-screen-2xl mx-auto grid grid-cols-1 sm:grid-cols-6 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8">
+            <div className="flex-1 p-2 mt-4">
+                <main className="mt-14 px-2 sm:px-4 md:px-6 pb-16 sm:pb-16 md:pb-16">
+                    <div className="max-w-screen-2xl mx-auto grid grid-cols-1 sm:grid-cols-6 lg:grid-cols-12 gap-3 sm:gap-4 lg:gap-5">
                         <div className="col-span-1 sm:col-span-6 lg:col-span-4 flex flex-col h-full">
                             <PatientOverview />
                         </div>
@@ -26,7 +26,7 @@ const HomePage = () => {
                             <FeeDetails />
                         </div>
 
-                        <div className="col-span-1 sm:col-span-6 lg:col-span-8 flex flex-col h-full mt-0 lg:-mt-10">
+                        <div className="ol-span-1 sm:col-span-6 lg:col-span-8 flex flex-col h-full mt-0 lg:-mt-8">
                             <MedicineTable />
                         </div>
 

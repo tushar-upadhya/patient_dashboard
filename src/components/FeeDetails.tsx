@@ -29,6 +29,8 @@ const FeeDetails: React.FC = () => {
             valueClass:
                 fees.paymentStatus === "Paid"
                     ? "text-green-600"
+                    : fees.paymentStatus === "Pending"
+                    ? "text-yellow-600"
                     : "text-red-600",
         },
         { label: "Payment Mode", value: fees.paymentMode },
@@ -42,7 +44,7 @@ const FeeDetails: React.FC = () => {
                 </CardTitle>
             </CardHeader>
             <CardContent aria-labelledby="fee-details-title">
-                <dl className="grid grid-cols-2 sm:grid-cols-2 gap-4">
+                <dl className="grid grid-cols-2 gap-4">
                     {feeItems.map(({ label, value, valueClass }, idx) => (
                         <div key={idx}>
                             <dt className="text-sm text-muted-foreground">
@@ -55,7 +57,7 @@ const FeeDetails: React.FC = () => {
                     ))}
 
                     {/* Total amount spans two columns */}
-                    <div className="col-span-1 sm:col-span-2">
+                    <div className="col-span-2">
                         <dt className="text-sm text-muted-foreground font-semibold">
                             Total Amount
                         </dt>
@@ -68,4 +70,5 @@ const FeeDetails: React.FC = () => {
         </Card>
     );
 };
+
 export default FeeDetails;

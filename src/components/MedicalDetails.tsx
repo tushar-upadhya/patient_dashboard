@@ -12,7 +12,7 @@ const MedicalSection: React.FC<SectionProps> = ({ id, title, children }) => (
     <section aria-labelledby={id}>
         <h3
             id={id}
-            className="text-sm font-semibold text-muted-foreground mb-1"
+            className="text-xs font-semibold text-muted-foreground mb-1"
         >
             {title}
         </h3>
@@ -26,15 +26,18 @@ const MedicalDetails: React.FC = () => {
     );
 
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle className="text-lg text-muted-foreground">
+        <Card className="w-full">
+            <CardHeader className="pb-2">
+                <CardTitle className="text-base text-muted-foreground">
                     Medical Details
                 </CardTitle>
             </CardHeader>
-            <CardContent aria-labelledby="medical-details-title">
+            <CardContent
+                aria-labelledby="medical-details-title"
+                className="px-3 py-3 sm:px-4 sm:py-3"
+            >
                 <div
-                    className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+                    className="grid grid-cols-1 sm:grid-cols-2 gap-3"
                     aria-label="Medical details grid"
                 >
                     <MedicalSection id="diagnoses-title" title="Diagnoses">
