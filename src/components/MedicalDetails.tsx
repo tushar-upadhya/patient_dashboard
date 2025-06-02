@@ -10,7 +10,10 @@ export const MedicalDetails: React.FC = () => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle id="medical-details-title">
+                <CardTitle
+                    id="medical-details-title"
+                    className="text-lg text-muted-foreground"
+                >
                     Medical Details
                 </CardTitle>
             </CardHeader>
@@ -20,10 +23,13 @@ export const MedicalDetails: React.FC = () => {
                     aria-label="Medical details grid"
                 >
                     <section aria-labelledby="diagnoses-title">
-                        <h3 id="diagnoses-title" className="font-medium mb-2">
+                        <h3
+                            id="diagnoses-title"
+                            className="text-sm font-semibold text-muted-foreground mb-1"
+                        >
                             Diagnoses
                         </h3>
-                        <ul className="list-disc pl-5">
+                        <ul className="list-disc pl-5 text-sm">
                             {medicalDetails.diagnoses.length > 0 ? (
                                 medicalDetails.diagnoses.map((diag, idx) => (
                                     <li key={idx}>{diag}</li>
@@ -39,26 +45,33 @@ export const MedicalDetails: React.FC = () => {
                     <section aria-labelledby="treatment-plan-title">
                         <h3
                             id="treatment-plan-title"
-                            className="font-medium mb-2"
+                            className="text-sm font-semibold text-muted-foreground mb-1"
                         >
                             Treatment Plan
                         </h3>
-                        <p>
+                        <p className="text-sm">
                             {medicalDetails.treatmentPlan || (
-                                <em>No treatment plan provided</em>
+                                <em className="text-gray-500">
+                                    No treatment plan provided
+                                </em>
                             )}
                         </p>
                     </section>
 
                     <section aria-labelledby="allergies-title">
-                        <h3 id="allergies-title" className="font-medium mb-2">
+                        <h3
+                            id="allergies-title"
+                            className="text-sm font-semibold text-muted-foreground mb-1"
+                        >
                             Allergies
                         </h3>
-                        <p>
+                        <p className="text-sm">
                             {medicalDetails.allergies.length > 0 ? (
                                 medicalDetails.allergies.join(", ")
                             ) : (
-                                <em>No allergies reported</em>
+                                <em className="text-gray-500">
+                                    No allergies reported
+                                </em>
                             )}
                         </p>
                     </section>
@@ -66,15 +79,17 @@ export const MedicalDetails: React.FC = () => {
                     <section aria-labelledby="past-medical-history-title">
                         <h3
                             id="past-medical-history-title"
-                            className="font-medium mb-2"
+                            className="text-sm font-semibold text-muted-foreground mb-1"
                         >
                             Past Medical History
                         </h3>
-                        <p>
+                        <p className="text-sm">
                             {medicalDetails.pastMedicalHistory.length > 0 ? (
                                 medicalDetails.pastMedicalHistory.join(", ")
                             ) : (
-                                <em>No past medical history</em>
+                                <em className="text-gray-500">
+                                    No past medical history
+                                </em>
                             )}
                         </p>
                     </section>

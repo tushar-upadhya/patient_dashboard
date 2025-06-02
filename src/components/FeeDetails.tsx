@@ -7,40 +7,81 @@ export const FeeDetails: React.FC = () => {
         (state: { patient: PatientState }) => state.patient
     );
 
+    if (!fees) return null; // or show loader/error
+
     return (
         <Card>
             <CardHeader>
-                <CardTitle id="fee-details-title">Fee Details</CardTitle>
+                <CardTitle
+                    id="fee-details-title"
+                    className="text-lg text-muted-foreground"
+                >
+                    Fee Details
+                </CardTitle>
             </CardHeader>
             <CardContent aria-labelledby="fee-details-title">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <p>
-                        <strong>Room Charges:</strong> $
-                        {fees.roomCharges.toFixed(2)}
-                    </p>
-                    <p>
-                        <strong>Medicine Charges:</strong> $
-                        {fees.medicineCharges.toFixed(2)}
-                    </p>
-                    <p>
-                        <strong>Lab Test Charges:</strong> $
-                        {fees.labTestCharges.toFixed(2)}
-                    </p>
-                    <p>
-                        <strong>Surgery Charges:</strong> $
-                        {fees.surgeryCharges.toFixed(2)}
-                    </p>
-                    <p className="font-semibold">
-                        <strong>Total Amount:</strong> $
-                        {fees.totalAmount.toFixed(2)}
-                    </p>
-                    <p>
-                        <strong>Payment Status:</strong> {fees.paymentStatus}
-                    </p>
-                    <p>
-                        <strong>Payment Mode:</strong> {fees.paymentMode}
-                    </p>
-                </div>
+                <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <dt className="text-sm text-muted-foreground">
+                            Room Charges
+                        </dt>
+                        <dd className="font-medium">
+                            ${fees.roomCharges.toFixed(2)}
+                        </dd>
+                    </div>
+                    <div>
+                        <dt className="text-sm text-muted-foreground">
+                            Medicine Charges
+                        </dt>
+                        <dd className="font-medium">
+                            ${fees.medicineCharges.toFixed(2)}
+                        </dd>
+                    </div>
+                    <div>
+                        <dt className="text-sm text-muted-foreground">
+                            Lab Test Charges
+                        </dt>
+                        <dd className="font-medium">
+                            ${fees.labTestCharges.toFixed(2)}
+                        </dd>
+                    </div>
+                    <div>
+                        <dt className="text-sm text-muted-foreground">
+                            Surgery Charges
+                        </dt>
+                        <dd className="font-medium">
+                            ${fees.surgeryCharges.toFixed(2)}
+                        </dd>
+                    </div>
+                    <div className="col-span-1 sm:col-span-2">
+                        <dt className="text-sm text-muted-foreground font-semibold">
+                            Total Amount
+                        </dt>
+                        <dd className="font-bold text-primary text-lg">
+                            ${fees.totalAmount.toFixed(2)}
+                        </dd>
+                    </div>
+                    <div>
+                        <dt className="text-sm text-muted-foreground">
+                            Payment Status
+                        </dt>
+                        <dd
+                            className={`font-medium ${
+                                fees.paymentStatus === "Paid"
+                                    ? "text-green-600"
+                                    : "text-red-600"
+                            }`}
+                        >
+                            {fees.paymentStatus}
+                        </dd>
+                    </div>
+                    <div>
+                        <dt className="text-sm text-muted-foreground">
+                            Payment Mode
+                        </dt>
+                        <dd className="font-medium">{fees.paymentMode}</dd>
+                    </div>
+                </dl>
             </CardContent>
         </Card>
     );

@@ -2,7 +2,6 @@ import type { PatientState } from "@/types/patient";
 import { useSelector } from "react-redux";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Input } from "./ui/input";
 import {
     Table,
     TableBody,
@@ -26,73 +25,74 @@ export const ReportsSection: React.FC = () => {
         });
     };
 
-    // Limit to first 3 reports
     const reportsToShow = reports.slice(0, 3);
 
     return (
-        <Card>
+        <Card className="">
             <CardHeader>
-                <CardTitle id="reports-section-title">
+                <CardTitle className="text-lg sm:text-lg text-muted-foreground">
                     Medical Reports
                 </CardTitle>
             </CardHeader>
-            <CardContent aria-labelledby="reports-section-title">
-                <div className="space-y-4">
-                    <label htmlFor="report-upload" className="sr-only">
-                        Upload medical report
-                    </label>
-                    <Input
-                        id="report-upload"
-                        type="file"
-                        accept=".pdf,.jpg,.png"
-                        className="mb-4"
-                    />
-
-                    {reportsToShow.length === 0 ? (
-                        <p className="italic text-gray-500">
-                            No medical reports available.
-                        </p>
-                    ) : (
-                        <div className="overflow-x-auto">
-                            <Table className="min-w-[600px]">
-                                <TableHeader>
-                                    <TableRow>
-                                        <TableHead>Report Type</TableHead>
-                                        <TableHead>Date</TableHead>
-                                        <TableHead>Description</TableHead>
-                                        <TableHead>Actions</TableHead>
+            <CardContent
+                aria-labelledby="reports-section-title"
+                className="space-y-4"
+            >
+                {reportsToShow.length === 0 ? (
+                    <p className="italic text-gray-500 text-center">
+                        No medical reports available.
+                    </p>
+                ) : (
+                    <div className="overflow-x-auto">
+                        <Table className="min-w-[600px]">
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead className="">
+                                        Report Type
+                                    </TableHead>
+                                    <TableHead className="">Date</TableHead>
+                                    <TableHead className="">
+                                        Description
+                                    </TableHead>
+                                    <TableHead className="">Actions</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {reportsToShow.map((report) => (
+                                    <TableRow
+                                        key={report.id}
+                                        className="hover:bg-blue-50 transition-colors duration-200"
+                                    >
+                                        <TableCell>{report.type}</TableCell>
+                                        <TableCell>
+                                            {formatDate(report.date)}
+                                        </TableCell>
+                                        <TableCell>
+                                            {report.description}
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className="flex space-x-2">
+                                                <Button
+                                                    size="sm"
+                                                    className=" text-white"
+                                                >
+                                                    View
+                                                </Button>
+                                                <Button
+                                                    size="sm"
+                                                    variant="outline"
+                                                    className=" hover:bg-blue-50"
+                                                >
+                                                    Download
+                                                </Button>
+                                            </div>
+                                        </TableCell>
                                     </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    {reportsToShow.map((report) => (
-                                        <TableRow key={report.id}>
-                                            <TableCell>{report.type}</TableCell>
-                                            <TableCell>
-                                                {formatDate(report.date)}
-                                            </TableCell>
-                                            <TableCell>
-                                                {report.description}
-                                            </TableCell>
-                                            <TableCell>
-                                                <div className="flex space-x-2">
-                                                    <Button size="sm">
-                                                        View
-                                                    </Button>
-                                                    <Button
-                                                        size="sm"
-                                                        variant="outline"
-                                                    >
-                                                        Download
-                                                    </Button>
-                                                </div>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </div>
-                    )}
-                </div>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                )}
             </CardContent>
         </Card>
     );

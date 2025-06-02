@@ -11,7 +11,7 @@ export const PatientOverview: React.FC = () => {
     return (
         <Card className="w-full">
             <CardHeader className="-mt-2">
-                <CardTitle className="text-xl font-semibold text-gray-800">
+                <CardTitle className="text-lg sm:text-lg text-muted-foreground">
                     Patient Overview
                 </CardTitle>
             </CardHeader>

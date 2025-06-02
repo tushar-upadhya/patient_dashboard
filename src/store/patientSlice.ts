@@ -94,12 +94,6 @@ const initialState: PatientState = {
             date: "2025-05-30",
             description: "Chest X-Ray",
         },
-        {
-            id: 2,
-            type: "X-Ray",
-            date: "2025-05-30",
-            description: "Chest X-Ray",
-        },
     ],
     vitals: [
         { date: "2025-05-28", bp: "120/80", heartRate: 72, temperature: 98.6 },

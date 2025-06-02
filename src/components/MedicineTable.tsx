@@ -19,7 +19,7 @@ export const MedicineTable: React.FC = () => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle id="medicine-details-title">
+                <CardTitle className="text-lg sm:text-lg text-muted-foreground">
                     Medicine Details
                 </CardTitle>
             </CardHeader>
