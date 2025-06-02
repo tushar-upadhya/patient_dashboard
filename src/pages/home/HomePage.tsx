@@ -4,7 +4,8 @@ import { BottomTabs } from "@/components/layout/BottomTabs";
 import { Topbar } from "@/components/layout/Topbar";
 import { MedicalDetails } from "@/components/MedicalDetails";
 import { MedicineTable } from "@/components/MedicineTable";
-import { PatientOverview } from "@/components/PatientOverview";
+import PatientOverview from "@/components/PatientOverview";
+
 import { ReportsSection } from "@/components/ReportsSection";
 
 const HomePage = () => {

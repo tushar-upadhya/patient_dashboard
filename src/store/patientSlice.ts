@@ -59,6 +59,14 @@ const initialState: PatientState = {
             duration: "60 days",
             prescribedBy: "Dr. Jones",
         },
+        {
+            id: 5,
+            name: "Metformin",
+            dosage: "500mg",
+            frequency: "Twice Daily",
+            duration: "60 days",
+            prescribedBy: "Dr. Jones",
+        },
     ],
     fees: {
         roomCharges: 1500,
