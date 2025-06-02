@@ -12,10 +12,53 @@ const formatDate = (date: string) =>
         minute: "2-digit",
     });
 
+interface InfoRowProps {
+    label: string;
+    value: React.ReactNode;
+}
+
+const InfoRow: React.FC<InfoRowProps> = ({ label, value }) => (
+    <p className="flex justify-baseline">
+        <span className="font-medium w-28 text-left">{label}</span>
+        <span className="text-muted-foreground">{value}</span>
+    </p>
+);
+
 const PatientOverview: React.FC = () => {
     const { profile } = useSelector(
         (state: { patient: PatientState }) => state.patient
     );
+
+    const leftColumn = [
+        { label: "Name:", value: profile.name },
+        { label: "Age:", value: profile.age },
+        {
+            label: "Gender:",
+            value: <span className="capitalize">{profile.gender}</span>,
+        },
+        { label: "Patient ID:", value: profile.patientId },
+    ];
+
+    const rightColumn = [
+        { label: "Admit Date:", value: formatDate(profile.admitDate) },
+        {
+            label: "Discharge Date:",
+            value: profile.dischargeDate
+                ? formatDate(profile.dischargeDate)
+                : "N/A",
+        },
+        {
+            label: "Duration of Stay:",
+            value: calculateStayDuration(
+                profile.admitDate,
+                profile.dischargeDate
+            ),
+        },
+        {
+            label: "Status:",
+            value: <span className="capitalize">{profile.status}</span>,
+        },
+    ];
 
     return (
         <Card className="w-full">
@@ -25,75 +68,16 @@ const PatientOverview: React.FC = () => {
                 </CardTitle>
             </CardHeader>
             <CardContent className="px-4 py-4 sm:px-6 sm:py-4">
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full">
-                    {/* Optional Avatar */}
-                    {/* <Avatar className="h-16 w-16">
-            <AvatarImage src={profile.profilePic} alt={`${profile.name}'s profile`} />
-            <AvatarFallback>{profile.name?.charAt(0)}</AvatarFallback>
-          </Avatar> */}
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full text-sm text-gray-800">
-                        <div className="space-y-1.5">
-                            <p>
-                                <span className="font-medium">Name:</span>{" "}
-                                <span className="text-muted-foreground">
-                                    {profile.name}
-                                </span>
-                            </p>
-                            <p>
-                                <span className="font-medium">Age:</span>{" "}
-                                <span className="text-muted-foreground">
-                                    {profile.age}
-                                </span>
-                            </p>
-                            <p>
-                                <span className="font-medium">Gender:</span>{" "}
-                                <span className="text-muted-foreground capitalize">
-                                    {profile.gender}
-                                </span>
-                            </p>
-                            <p>
-                                <span className="font-medium">Patient ID:</span>{" "}
-                                <span className="text-muted-foreground">
-                                    {profile.patientId}
-                                </span>
-                            </p>
-                        </div>
-                        <div className="space-y-1.5">
-                            <p>
-                                <span className="font-medium">Admit Date:</span>{" "}
-                                <span className="text-muted-foreground">
-                                    {formatDate(profile.admitDate)}
-                                </span>
-                            </p>
-                            <p>
-                                <span className="font-medium">
-                                    Discharge Date:
-                                </span>{" "}
-                                <span className="text-muted-foreground">
-                                    {profile.dischargeDate
-                                        ? formatDate(profile.dischargeDate)
-                                        : "N/A"}
-                                </span>
-                            </p>
-                            <p>
-                                <span className="font-medium">
-                                    Duration of Stay:
-                                </span>{" "}
-                                <span className="text-muted-foreground">
-                                    {calculateStayDuration(
-                                        profile.admitDate,
-                                        profile.dischargeDate
-                                    )}
-                                </span>
-                            </p>
-                            <p>
-                                <span className="font-medium">Status:</span>{" "}
-                                <span className="text-muted-foreground capitalize">
-                                    {profile.status}
-                                </span>
-                            </p>
-                        </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full text-sm text-gray-800">
+                    <div className="space-y-4">
+                        {leftColumn.map(({ label, value }) => (
+                            <InfoRow key={label} label={label} value={value} />
+                        ))}
+                    </div>
+                    <div className="space-y-4">
+                        {rightColumn.map(({ label, value }) => (
+                            <InfoRow key={label} label={label} value={value} />
+                        ))}
                     </div>
                 </div>
             </CardContent>

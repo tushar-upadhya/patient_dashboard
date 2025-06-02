@@ -11,7 +11,7 @@ import {
     TableRow,
 } from "./ui/table";
 
-export const ReportsSection: React.FC = () => {
+const ReportsSection: React.FC = () => {
     const { reports } = useSelector(
         (state: { patient: PatientState }) => state.patient
     );
@@ -28,9 +28,12 @@ export const ReportsSection: React.FC = () => {
     const reportsToShow = reports.slice(0, 3);
 
     return (
-        <Card className="">
+        <Card>
             <CardHeader>
-                <CardTitle className="text-lg sm:text-lg text-muted-foreground">
+                <CardTitle
+                    id="reports-section-title"
+                    className="text-lg text-muted-foreground"
+                >
                     Medical Reports
                 </CardTitle>
             </CardHeader>
@@ -47,14 +50,10 @@ export const ReportsSection: React.FC = () => {
                         <Table className="min-w-[600px]">
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="">
-                                        Report Type
-                                    </TableHead>
-                                    <TableHead className="">Date</TableHead>
-                                    <TableHead className="">
-                                        Description
-                                    </TableHead>
-                                    <TableHead className="">Actions</TableHead>
+                                    <TableHead>Report Type</TableHead>
+                                    <TableHead>Date</TableHead>
+                                    <TableHead>Description</TableHead>
+                                    <TableHead>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -74,14 +73,14 @@ export const ReportsSection: React.FC = () => {
                                             <div className="flex space-x-2">
                                                 <Button
                                                     size="sm"
-                                                    className=" text-white"
+                                                    className="text-white"
                                                 >
                                                     View
                                                 </Button>
                                                 <Button
                                                     size="sm"
                                                     variant="outline"
-                                                    className=" hover:bg-blue-50"
+                                                    className="hover:bg-blue-50"
                                                 >
                                                     Download
                                                 </Button>
@@ -97,3 +96,4 @@ export const ReportsSection: React.FC = () => {
         </Card>
     );
 };
+export default ReportsSection;

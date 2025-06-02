@@ -1,3 +1,4 @@
+// BottomTabs.tsx
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -21,16 +22,13 @@ const tabItems = [
     { label: "Settings", icon: Settings, path: "/settings" },
 ];
 
-// Helper function to get tab value from path
+// Helper to get current tab value from URL path
 function getTabValueFromPath(pathname: string) {
-    // Normalize pathname (remove trailing slash)
     const normalized = pathname.replace(/\/$/, "");
-
-    // Find tab with exact path or that starts with path (for nested routes)
     const tab = tabItems.find(
-        (t) => normalized === t.path || normalized.startsWith(t.path + "/") // handles subroutes like /patients/123
+        (t) => normalized === t.path || normalized.startsWith(t.path + "/")
     );
-    return tab ? tab.label.toLowerCase().replace(/\s/g, "") : "dashboard"; // fallback
+    return tab ? tab.label.toLowerCase().replace(/\s/g, "") : "dashboard";
 }
 
 export const BottomTabs: React.FC = () => {
@@ -39,14 +37,10 @@ export const BottomTabs: React.FC = () => {
 
     const currentTab = getTabValueFromPath(location.pathname);
 
-    // DEBUGGING LOGS: remove after confirming
-    console.log("Current Path:", location.pathname);
-    console.log("Current Tab:", currentTab);
-
     return (
         <div>
-            {/* Small screens */}
-            <div className="fixed bottom-0 left-0 z-10 sm:hidden w-full">
+            {/* Small screens: fixed bottom, scrollable tabs */}
+            <div className="fixed bottom-0 left-0 z-10 sm:hidden w-full bg-muted rounded-t-lg shadow-lg">
                 <Tabs value={currentTab} className="w-auto max-w-full">
                     <ScrollArea className="w-auto max-w-full rounded-t-lg bg-muted">
                         <TabsList className="flex w-max gap-3 px-3 py-2">
@@ -72,7 +66,7 @@ export const BottomTabs: React.FC = () => {
                 </Tabs>
             </div>
 
-            {/* Medium+ screens */}
+            {/* Medium and up: centered full-width tabs */}
             <div className="hidden sm:block">
                 <Tabs value={currentTab} className="w-full">
                     <TabsList className="flex items-center justify-center gap-6 px-6 py-3 bg-muted rounded-lg max-w-screen-2xl mx-auto">

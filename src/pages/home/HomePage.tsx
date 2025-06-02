@@ -1,11 +1,11 @@
 import { ChartAreaInteractive } from "@/components/ChartsOverview";
-import { FeeDetails } from "@/components/FeeDetails";
+import FeeDetails from "@/components/FeeDetails";
 import { BottomTabs } from "@/components/layout/BottomTabs";
 import { Topbar } from "@/components/layout/Topbar";
-import { MedicalDetails } from "@/components/MedicalDetails";
-import { MedicineTable } from "@/components/MedicineTable";
+import MedicalDetails from "@/components/MedicalDetails";
+import MedicineTable from "@/components/MedicineTable";
 import PatientOverview from "@/components/PatientOverview";
-import { ReportsSection } from "@/components/ReportsSection";
+import ReportsSection from "@/components/ReportsSection";
 
 const HomePage = () => {
     return (
@@ -26,7 +26,7 @@ const HomePage = () => {
                             <FeeDetails />
                         </div>
 
-                        <div className="col-span-1 sm:col-span-6 lg:col-span-8 flex flex-col h-full mt-0 lg:-mt-16">
+                        <div className="col-span-1 sm:col-span-6 lg:col-span-8 flex flex-col h-full mt-0 lg:-mt-10">
                             <MedicineTable />
                         </div>
 

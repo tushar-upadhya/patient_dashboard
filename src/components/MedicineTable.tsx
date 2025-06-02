@@ -1,7 +1,7 @@
 import type { PatientState } from "@/types/patient";
 import { useSelector } from "react-redux";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { ScrollArea } from "./ui/scroll-area"; // Import ScrollArea from shadcn/ui
+import { ScrollArea } from "./ui/scroll-area";
 import {
     Table,
     TableBody,
@@ -11,7 +11,7 @@ import {
     TableRow,
 } from "./ui/table";
 
-export const MedicineTable: React.FC = () => {
+const MedicineTable: React.FC = () => {
     const medicines = useSelector(
         (state: { patient: PatientState }) => state.patient.medicines
     );
@@ -19,7 +19,10 @@ export const MedicineTable: React.FC = () => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle className="text-lg text-muted-foreground">
+                <CardTitle
+                    id="medicine-details-title"
+                    className="text-lg text-muted-foreground"
+                >
                     Medicine Details
                 </CardTitle>
             </CardHeader>
@@ -78,3 +81,4 @@ export const MedicineTable: React.FC = () => {
         </Card>
     );
 };
+export default MedicineTable;
