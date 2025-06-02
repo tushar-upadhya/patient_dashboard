@@ -24,7 +24,7 @@ export const MedicineTable: React.FC = () => {
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                <ScrollArea className="h-48 w-full">
+                <ScrollArea className="h-52 w-full">
                     <div className="overflow-x-auto min-w-[600px]">
                         <Table aria-describedby="medicine-details-title">
                             <caption className="sr-only">

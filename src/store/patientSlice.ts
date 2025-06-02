@@ -52,22 +52,6 @@ const initialState: PatientState = {
             prescribedBy: "Dr. Jones",
         },
         {
-            id: 4,
-            name: "Metformin",
-            dosage: "500mg",
-            frequency: "Twice Daily",
-            duration: "60 days",
-            prescribedBy: "Dr. Jones",
-        },
-        {
-            id: 4,
-            name: "Metformin",
-            dosage: "500mg",
-            frequency: "Twice Daily",
-            duration: "60 days",
-            prescribedBy: "Dr. Jones",
-        },
-        {
             id: 5,
             name: "Metformin",
             dosage: "500mg",
@@ -91,6 +75,24 @@ const initialState: PatientState = {
             type: "Blood Test",
             date: "2025-05-29",
             description: "CBC Report",
+        },
+        {
+            id: 2,
+            type: "X-Ray",
+            date: "2025-05-30",
+            description: "Chest X-Ray",
+        },
+        {
+            id: 2,
+            type: "X-Ray",
+            date: "2025-05-30",
+            description: "Chest X-Ray",
+        },
+        {
+            id: 2,
+            type: "X-Ray",
+            date: "2025-05-30",
+            description: "Chest X-Ray",
         },
         {
             id: 2,

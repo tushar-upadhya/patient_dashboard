@@ -9,19 +9,27 @@ import { ReportsSection } from "./components/ReportsSection";
 
 export const App: React.FC = () => (
     <>
-        <Topbar />
-        <div className="flex">
-            <Sidebar />
-            <main className="flex-1 mt-16 p-4 lg:ml-64">
-                <div className=" grid gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
-                    <PatientOverview />
-                    <MedicalDetails />
-                    <MedicineTable />
-                    <FeeDetails />
-                    <ReportsSection />
-                    <ChartsOverview />
-                </div>
-            </main>
-        </div>
+        <>
+            <Topbar />
+            <div className="flex">
+                <Sidebar />
+                <main className="flex-1 mt-16 p-4 lg:ml-64">
+                    <div className="max-w-screen-2xl grid gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
+                        <PatientOverview />
+                        <MedicalDetails />
+                        <MedicineTable />
+                        <FeeDetails />
+
+                        <div className="xl:col-span-1">
+                            <ReportsSection />
+                        </div>
+
+                        <div className="xl:col-span-3">
+                            <ChartsOverview />
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </>
     </>
 );

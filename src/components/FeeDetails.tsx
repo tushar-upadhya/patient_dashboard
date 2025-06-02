@@ -10,26 +10,29 @@ export const FeeDetails: React.FC = () => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Fee Details</CardTitle>
+                <CardTitle id="fee-details-title">Fee Details</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent aria-labelledby="fee-details-title">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <p>
-                        <strong>Room Charges:</strong> ${fees.roomCharges}
+                        <strong>Room Charges:</strong> $
+                        {fees.roomCharges.toFixed(2)}
                     </p>
                     <p>
                         <strong>Medicine Charges:</strong> $
-                        {fees.medicineCharges}
+                        {fees.medicineCharges.toFixed(2)}
                     </p>
                     <p>
                         <strong>Lab Test Charges:</strong> $
-                        {fees.labTestCharges}
+                        {fees.labTestCharges.toFixed(2)}
                     </p>
                     <p>
-                        <strong>Surgery Charges:</strong> ${fees.surgeryCharges}
+                        <strong>Surgery Charges:</strong> $
+                        {fees.surgeryCharges.toFixed(2)}
                     </p>
-                    <p>
-                        <strong>Total Amount:</strong> ${fees.totalAmount}
+                    <p className="font-semibold">
+                        <strong>Total Amount:</strong> $
+                        {fees.totalAmount.toFixed(2)}
                     </p>
                     <p>
                         <strong>Payment Status:</strong> {fees.paymentStatus}
