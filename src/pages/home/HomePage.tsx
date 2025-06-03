@@ -26,7 +26,7 @@ const HomePage = () => {
                             <FeeDetails />
                         </div>
 
-                        <div className="ol-span-1 sm:col-span-6 lg:col-span-8 flex flex-col h-full mt-0 lg:-mt-8">
+                        <div className="ol-span-1 sm:col-span-6 lg:col-span-8 flex flex-col h-full mt-0 lg:-mt-3">
                             <MedicineTable />
                         </div>
 
