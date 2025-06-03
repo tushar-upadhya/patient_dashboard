@@ -26,11 +26,11 @@ const HomePage = () => {
                             <FeeDetails />
                         </div>
 
-                        <div className="ol-span-1 sm:col-span-6 lg:col-span-8 flex flex-col h-full mt-0 lg:-mt-3">
+                        <div className="col-span-1 sm:col-span-6  lg:col-span-8 flex flex-col h-full mt-0 lg:-mt-3">
                             <MedicineTable />
                         </div>
 
-                        <div className="col-span-1 sm:col-span-3 lg:col-span-4 flex flex-col h-full">
+                        <div className="col-span-1 sm:col-span-6 lg:col-span-4 flex flex-col h-full">
                             <ReportsSection />
                         </div>
 
