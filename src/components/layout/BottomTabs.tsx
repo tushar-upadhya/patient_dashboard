@@ -1,5 +1,10 @@
-// BottomTabs.tsx
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
     BarChart2,
@@ -12,6 +17,9 @@ import {
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+const normalizeTabValue = (label: string) =>
+    label.toLowerCase().replace(/\s/g, "");
+
 const tabItems = [
     { label: "Dashboard", icon: Home, path: "/dashboard" },
     { label: "Patient Details", icon: Users, path: "/patients" },
@@ -22,70 +30,61 @@ const tabItems = [
     { label: "Settings", icon: Settings, path: "/settings" },
 ];
 
-// Helper to get current tab value from URL path
-function getTabValueFromPath(pathname: string) {
-    const normalized = pathname.replace(/\/$/, "");
+const getTabValueFromPath = (pathname: string) => {
+    const normalizedPath = pathname.replace(/\/$/, "");
     const tab = tabItems.find(
-        (t) => normalized === t.path || normalized.startsWith(t.path + "/")
+        (t) =>
+            normalizedPath === t.path || normalizedPath.startsWith(t.path + "/")
     );
-    return tab ? tab.label.toLowerCase().replace(/\s/g, "") : "dashboard";
-}
+    return tab ? normalizeTabValue(tab.label) : normalizeTabValue("Dashboard");
+};
 
 export const BottomTabs: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-
     const currentTab = getTabValueFromPath(location.pathname);
+
+    const handleNavigate = (value: string) => {
+        const tab = tabItems.find((t) => normalizeTabValue(t.label) === value);
+        if (tab) navigate(tab.path);
+    };
 
     return (
         <div>
-            {/* Small screens: fixed bottom, scrollable tabs */}
-            <div className="fixed bottom-0 left-0 z-10 sm:hidden w-full bg-muted rounded-t-lg shadow-lg">
-                <Tabs value={currentTab} className="w-auto max-w-full">
-                    <ScrollArea className="w-auto max-w-full rounded-t-lg bg-muted">
-                        <TabsList className="flex w-max gap-3 px-3 py-2">
-                            {tabItems.map(({ label, icon: Icon, path }) => {
-                                const value = label
-                                    .toLowerCase()
-                                    .replace(/\s/g, "");
-                                return (
-                                    <TabsTrigger
-                                        key={path}
-                                        value={value}
-                                        className="flex items-center gap-1 px-4 py-2 text-xs whitespace-nowrap"
-                                        onClick={() => navigate(path)}
-                                    >
-                                        <Icon className="h-4 w-4" />
-                                        {label}
-                                    </TabsTrigger>
-                                );
-                            })}
-                        </TabsList>
-                        <ScrollBar orientation="horizontal" />
-                    </ScrollArea>
-                </Tabs>
+            {/* Mobile & Tablet View */}
+            <div className="lg:hidden px-4 py-3 bg-muted w-full fixed bottom-0 left-0 z-10 shadow-md">
+                <Select value={currentTab} onValueChange={handleNavigate}>
+                    <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select a section" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {tabItems.map(({ label }) => (
+                            <SelectItem
+                                key={label}
+                                value={normalizeTabValue(label)}
+                            >
+                                {label}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
             </div>
 
-            {/* Medium and up: centered full-width tabs */}
-            <div className="hidden sm:block">
+            {/* Desktop View */}
+            <div className="hidden lg:block">
                 <Tabs value={currentTab} className="w-full">
-                    <TabsList className="flex items-center justify-center gap-6 px-6 py-3 bg-muted rounded-lg max-w-screen-2xl mx-auto">
-                        {tabItems.map(({ label, icon: Icon, path }) => {
-                            const value = label
-                                .toLowerCase()
-                                .replace(/\s/g, "");
-                            return (
-                                <TabsTrigger
-                                    key={path}
-                                    value={value}
-                                    className="flex items-center gap-2 px-5 py-2 text-sm whitespace-nowrap"
-                                    onClick={() => navigate(path)}
-                                >
-                                    <Icon className="h-5 w-5" />
-                                    {label}
-                                </TabsTrigger>
-                            );
-                        })}
+                    <TabsList className="flex items-center justify-center gap-6 px-6 py-3 bg-muted rounded-lg max-w-screen-2xl mx-auto mt-4">
+                        {tabItems.map(({ label, icon: Icon, path }) => (
+                            <TabsTrigger
+                                key={path}
+                                value={normalizeTabValue(label)}
+                                className="flex items-center gap-2 px-5 py-2 text-sm whitespace-nowrap"
+                                onClick={() => navigate(path)}
+                            >
+                                <Icon className="h-5 w-5" />
+                                {label}
+                            </TabsTrigger>
+                        ))}
                     </TabsList>
                 </Tabs>
             </div>
