@@ -1,87 +1,144 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { calculateStayDuration } from "@/lib/utils";
-import type { PatientState } from "@/types/patient";
-import { useSelector } from "react-redux";
+import type { ChartConfig } from "@/components/ui/chart";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useState } from "react";
+import BarChartDynamic from "./charts/BarChartDynamic";
 
-const formatDate = (date: string) =>
-    new Date(date).toLocaleString(undefined, {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-    });
-
-interface InfoRowProps {
-    label: string;
-    value: React.ReactNode;
+// Define interface for admission data
+interface AdmissionData {
+    department: string;
+    admissions: number;
 }
 
-const InfoRow: React.FC<InfoRowProps> = ({ label, value }) => (
-    <p className="flex justify-baseline">
-        <span className="font-medium w-24 text-left">{label}</span>
-        <span className="text-muted-foreground">{value}</span>
-    </p>
-);
+const departments = [
+    "Anaesthesiology, Pain Medicine and Critical Care",
+    "Anatomy",
+    "Biochemistry",
+    "Academic Section",
+    "Biomedical Engineering",
+    "Biophysics",
+    "Biotechnology",
+    "Biostatistics",
+    "Cardiology",
+    "Cardiothoracic & Vascular Surgery (CTVS)",
+    "Centre for Community Medicine",
+    "College of Nursing",
+    "Dermatology & Venereology",
+    "Dietetics",
+    "Emergency Medicine",
+    "Endocrinology, Metabolism & Diabetes",
+    "Forensic Medicine and Toxicology",
+    "Finance Division",
+    "Geriatric Medicine",
+    "Gastroenterology and Human Nutrition",
+    "Gastrointestinal Surgery",
+    "Haematology",
+    "Hospital Administration",
+    "Laboratory Medicine",
+    "Medicine",
+    "Microbiology",
+    "Nephrology",
+    "Nuclear Medicine",
+    "Nuclear Magnetic Resonance",
+    "Nursing Department",
+    "Obstetrics and Gynaecology",
+    "Orthopaedics",
+    "Otorhinolaryngology",
+    "Pediatrics",
+    "Paediatric Surgery",
+    "Pathology",
+    "Pharmacology",
+    "Physiology",
+    "Physical Medicine & Rehabilitation",
+    "Burns & Plastic Surgery",
+    "Psychiatry",
+    "Pulmonary, Critical Care and Sleep Medicine",
+    "Radio Diagnosis",
+    "Reproductive Biology",
+    "Research Section",
+    "Rheumatology",
+    "Surgical Disciplines",
+    "Transplant Immunology & Immunogenetics",
+    "Blood Centre",
+    "Main Hospital Department of Transfusion Medicine",
+    "Urology",
+];
+
+const mockAdmissionData: AdmissionData[] = departments.map((dept) => ({
+    department: dept,
+    admissions: Math.floor(Math.random() * 50) + 10,
+}));
+
+const chartConfig: ChartConfig = {
+    admissions: {
+        label: "Admissions",
+        color: "rgba(59, 130, 246, 0.6)",
+    },
+    label: {
+        color: "white",
+    },
+};
 
 const PatientOverview: React.FC = () => {
-    const { profile } = useSelector(
-        (state: { patient: PatientState }) => state.patient
-    );
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    const leftColumn = [
-        { label: "Name:", value: profile.name },
-        { label: "Age:", value: profile.age },
-        {
-            label: "Gender:",
-            value: <span className="capitalize">{profile.gender}</span>,
-        },
-        { label: "Patient ID:", value: profile.patientId },
-    ];
+    const defaultChartData = mockAdmissionData.slice(0, 6);
 
-    const rightColumn = [
-        { label: "Admit Date:", value: formatDate(profile.admitDate) },
-        {
-            label: "Discharge Date:",
-            value: profile.dischargeDate
-                ? formatDate(profile.dischargeDate)
-                : "N/A",
-        },
-        {
-            label: "Duration of Stay:",
-            value: calculateStayDuration(
-                profile.admitDate,
-                profile.dischargeDate
-            ),
-        },
-        {
-            label: "Status:",
-            value: <span className="capitalize">{profile.status}</span>,
-        },
-    ];
+    const handleCardClick = () => {
+        setIsDialogOpen(true);
+    };
 
     return (
-        <Card className="w-full">
-            <CardHeader className="pb-2">
-                <CardTitle className="text-base text-muted-foreground">
-                    Patient Overview
-                </CardTitle>
-            </CardHeader>
-            <CardContent className="px-3 py-3 sm:px-4 sm:py-3">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full text-sm text-gray-800">
-                    <div className="space-y-2">
-                        {leftColumn.map(({ label, value }) => (
-                            <InfoRow key={label} label={label} value={value} />
-                        ))}
+        <>
+            <div
+                className="w-full cursor-pointer transform hover:scale-[1.02] transition-transform duration-200"
+                onClick={handleCardClick}
+                role="button"
+                aria-label="Open detailed admissions chart"
+            >
+                {defaultChartData.length > 0 ? (
+                    <BarChartDynamic
+                        data={defaultChartData}
+                        yAxisKey="department"
+                        xAxisKey="admissions"
+                        chartConfig={chartConfig}
+                        title="Admissions by Department"
+                        description={`Patient admissions across departments in ${new Date().getFullYear()}`}
+                        footerText={`Showing 6 of ${mockAdmissionData.length} departments • Click to view all`}
+                        className="w-full"
+                    />
+                ) : (
+                    <div className="text-center p-4 text-muted-foreground">
+                        No admission data available
                     </div>
-                    <div className="space-y-2">
-                        {rightColumn.map(({ label, value }) => (
-                            <InfoRow key={label} label={label} value={value} />
-                        ))}
-                    </div>
-                </div>
-            </CardContent>
-        </Card>
+                )}
+            </div>
+
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogContent className="max-w-[90vw] sm:max-w-12xl max-h-[90vh] overflow-hidden">
+                    <ScrollArea className="max-h-[60vh]">
+                        <div className="h-fit">
+                            {mockAdmissionData.length > 0 ? (
+                                <BarChartDynamic
+                                    data={mockAdmissionData}
+                                    yAxisKey="department"
+                                    xAxisKey="admissions"
+                                    chartConfig={chartConfig}
+                                    title="All Admissions by Department"
+                                    description={`Complete list of patient admissions across all departments in ${new Date().getFullYear()}`}
+                                    footerText={`Showing all ${mockAdmissionData.length} departments`}
+                                    className="w-full "
+                                />
+                            ) : (
+                                <div className="text-center p-4 text-muted-foreground">
+                                    No admission data available
+                                </div>
+                            )}
+                        </div>
+                    </ScrollArea>
+                </DialogContent>
+            </Dialog>
+        </>
     );
 };
 
