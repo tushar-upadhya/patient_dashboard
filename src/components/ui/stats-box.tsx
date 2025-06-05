@@ -8,17 +8,16 @@ export function StatsBox({ title, value, change, trend, icon }: StatsBoxData) {
         <Card
             className={cn(
                 "relative overflow-hidden p-4 transition-all duration-300 ease-in-out cursor-pointer group",
-                "bg-[#8EC5FF]/90 backdrop-blur-md border border-gray-100/50 shadow-sm",
-                "rounded-2xl hover:shadow-md hover:scale-[1.01]"
+                "bg-[#8EC5FF]/10 backdrop-blur-md border border-gray-100/50 shadow-sm"
             )}
         >
-            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-600 via-purple-500 to-indigo-600 opacity-80" />
+            <div className="absolute top-0 left-0 w-full h-1.5 " />
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-4">
                 <CardTitle className="text-sm font-medium tracking-tight text-gray-800">
                     {title}
                 </CardTitle>
                 {icon && (
-                    <div className="h-5 w-5 text-gray-400 transition-all duration-200 group-hover:text-[#2B7FFF] group-hover:scale-110">
+                    <div className="h-5 w-5 text-gray-400 transition-all duration-200 group-hover:text-[#2B7FFF] group-hover:scale-110 group-hover:font-semibold group-hover:animate-out">
                         {icon}
                     </div>
                 )}
