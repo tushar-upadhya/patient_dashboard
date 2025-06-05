@@ -34,7 +34,7 @@ const Tabss = () => {
                             <TabsTrigger
                                 key={tab.value}
                                 value={tab.value}
-                                className="px-4 py-2 text-sm rounded-md data-[state=active]:bg-white data-[state=active]:font-semibold flex-shrink-0 relative transition-all duration-200 ease-in-out after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#2B7FFF] after:scale-x-0 data-[state=active]:after:scale-x-100 after:transition-transform duration-200 ease-in-out"
+                                className="px-4 py-2 text-sm rounded-md data-[state=active]:bg-white data-[state=active]:font-semibold relative transition-all duration-200 ease-in-out after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px]"
                             >
                                 {tab.label}
                             </TabsTrigger>
@@ -51,7 +51,7 @@ const Tabss = () => {
                         <TabsTrigger
                             key={tab.value}
                             value={tab.value}
-                            className="px-4 py-2 text-sm rounded-md data-[state=active]:bg-white data-[state=active]:font-semibold relative transition-all duration-200 ease-in-out after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#2B7FFF] after:scale-x-0"
+                            className="px-4 py-2 text-sm rounded-md data-[state=active]:bg-white data-[state=active]:font-semibold relative transition-all duration-200 ease-in-out after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] "
                         >
                             {tab.label}
                         </TabsTrigger>
