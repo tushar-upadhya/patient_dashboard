@@ -68,7 +68,7 @@ export function PieChart({
                         y="50%"
                         textAnchor="middle"
                         dominantBaseline="middle"
-                        className="text-lg font-medium"
+                        className="text-lg font-semibold"
                     >
                         {centerText}
                     </text>

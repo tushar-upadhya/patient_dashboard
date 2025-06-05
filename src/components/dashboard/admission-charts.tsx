@@ -32,7 +32,6 @@ export function AdmissionCharts() {
         .map(([name, value]) => ({ name, value }))
         .sort((a, b) => b.value - a.value);
 
-    // 🧠 Filter admissions by selected department for PieChart
     const filteredAdmissions = selectedDepartment
         ? admissions.filter((a) => a.department === selectedDepartment)
         : admissions;
