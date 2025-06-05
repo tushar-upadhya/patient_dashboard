@@ -27,7 +27,7 @@ export function Overview() {
     const emergencyTrend = 8.4;
 
     return (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 ">
             <StatsBox
                 title="Total Admissions"
                 value={totalAdmissions}

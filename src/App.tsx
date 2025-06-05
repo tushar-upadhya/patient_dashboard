@@ -17,7 +17,7 @@ function App() {
                             <Overview />
                         </div>
                         <div className="col-span-1 md:col-span-2 lg:col-span-1 flex justify-center lg:justify-end">
-                            <div className="w-full sm:w-auto max-w-sm">
+                            <div className="w-full md:w-full lg:w-auto max-w-full sm:max-w-sm md:max-w-full lg:max-w-sm">
                                 <DateRangePicker />
                             </div>
                         </div>

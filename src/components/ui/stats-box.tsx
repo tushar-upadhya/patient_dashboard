@@ -5,42 +5,36 @@ import { ArrowDownIcon, ArrowUpIcon } from "lucide-react";
 
 export function StatsBox({ title, value, change, trend, icon }: StatsBoxData) {
     return (
-        <Card
-            className={cn(
-                "relative overflow-hidden p-4 transition-all duration-300 ease-in-out cursor-pointer group",
-                "bg-[#8EC5FF]/10 backdrop-blur-md border border-gray-100/50 shadow-sm"
-            )}
-        >
-            <div className="absolute top-0 left-0 w-full h-1.5 " />
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-4">
-                <CardTitle className="text-sm font-medium tracking-tight text-gray-800">
+        <Card className={cn("group relative cursor-pointer bg-[#EEF5FB]")}>
+            <CardHeader className="flex flex-row items-center justify-between p-3 pb-1 ">
+                <CardTitle className="text-sm text-gray-700 tracking-tight">
                     {title}
                 </CardTitle>
                 {icon && (
-                    <div className="h-5 w-5 text-gray-400 transition-all duration-200 group-hover:text-[#2B7FFF] group-hover:scale-110 group-hover:font-semibold group-hover:animate-out">
+                    <div className="text-gray-400 group-hover:text-[#2B7FFF] transition duration-200">
                         {icon}
                     </div>
                 )}
             </CardHeader>
-            <CardContent className="px-4 pt-1 pb-3">
+            <CardContent className="p-3 pt-1">
                 <div className="flex items-center justify-between">
-                    <div className="text-2xl font-semibold text-gray-900 tracking-tight">
+                    <div className="text-xl font-med text-gray-900">
                         {value.toLocaleString()}
                     </div>
                     <div
                         className={cn(
-                            "flex items-center px-2 py-1 rounded-full",
+                            "flex items-center rounded-md px-1.5 py-0.5 text-xs font-medium",
                             trend === "up"
-                                ? "bg-emerald-100/80 text-emerald-700"
-                                : "bg-rose-100/80 text-rose-700"
+                                ? "bg-emerald-100 text-emerald-600"
+                                : "bg-rose-100 text-rose-600"
                         )}
                     >
                         {trend === "up" ? (
-                            <ArrowUpIcon className="mr-1 h-3.5 w-3.5" />
+                            <ArrowUpIcon className="mr-1 h-3 w-3" />
                         ) : trend === "down" ? (
-                            <ArrowDownIcon className="mr-1 h-3.5 w-3.5" />
+                            <ArrowDownIcon className="mr-1 h-3 w-3" />
                         ) : null}
-                        <span className="text-xs animate-pulse font-semibold">
+                        <span>
                             {change > 0 ? "+" : ""}
                             {change.toFixed(1)}%
                         </span>
