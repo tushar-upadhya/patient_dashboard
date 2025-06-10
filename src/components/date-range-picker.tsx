@@ -39,7 +39,7 @@ export function DateRangePicker() {
                             !date && "text-muted-foreground"
                         )}
                     >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        <CalendarIcon className="w-4 h-4 mr-2" />
                         {date?.from ? (
                             date.to ? (
                                 <>
@@ -61,7 +61,13 @@ export function DateRangePicker() {
                         mode="range"
                         defaultMonth={date?.from}
                         selected={date}
-                        onSelect={(range) => range && setDate(range)}
+                        onSelect={(range) =>
+                            range &&
+                            setDate({
+                                from: range.from,
+                                to: range.to ?? undefined,
+                            })
+                        }
                         numberOfMonths={window.innerWidth < 640 ? 1 : 2}
                         className="p-3"
                     />
